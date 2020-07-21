@@ -1,0 +1,24 @@
+version: '3.1'
+services:
+  app:
+    container_name: bookstore
+    image: nancy27/firstbook:bookstore
+    ports:
+      - "8080:8080"
+    restart: always
+    depends_on:
+      - postgresqldb
+  postgresqldb:
+    image: postgres:latest
+    ports:
+      - "5432:5432"
+    restart: always
+    volumes:
+       - myvol:/var/lib/postgresql/data 
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=mydb
+
+volumes:
+    myvol:
